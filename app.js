@@ -42,6 +42,10 @@ canvas.addEventListener('mouseup', (e) => {
   ctx.beginPath();
 });
 
+canvas.addEventListener('mouseout', (e) => {
+  isPainting = false;
+});
+
 const draw = (e) => {
   if (!isPainting) {
     return;
@@ -57,3 +61,13 @@ canvas.addEventListener('mousemove', draw);
 // ctx.moveTo(0, 0);
 // ctx.lineTo(600, 600);
 // ctx.stroke();
+
+let downloadImage = () => {
+  let dataUrl = canvas.toDataURL('image/png');
+  let a = document.createElement('a');
+  a.href = dataUrl;
+  a.download = 'canvas-download.png';
+};
+
+let download = document.getElementById('downloadBtn');
+download.addEventListener('click', downloadImage);
